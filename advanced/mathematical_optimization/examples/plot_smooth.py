@@ -1,5 +1,8 @@
 """
 Smooth vs non-smooth
+=====================
+
+Draws a figure to explain smooth versus non smooth optimization.
 """
 import numpy as np
 import pylab as pl
@@ -27,4 +30,3 @@ pl.ylim(ymin=-.2)
 pl.axis('off')
 pl.tight_layout()
 pl.show()
-

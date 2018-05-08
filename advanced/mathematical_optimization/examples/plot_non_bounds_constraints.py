@@ -1,5 +1,9 @@
 """
-Optimization with general constraints using SLSQP and cobyla
+Optimization with constraints
+================================
+
+An example showing how to do optimization with general constraints using
+SLSQP and cobyla.
 """
 import numpy as np
 import pylab as pl
@@ -46,11 +50,10 @@ def f(x):
 def constraint(x):
     return np.atleast_1d(1.5 - np.sum(np.abs(x)))
 
-optimize.fmin_slsqp(f, np.array([0, 0]),
-                       ieqcons=[constraint, ])
+optimize.minimize(f, np.array([0, 0]), method="SLSQP",
+                     constraints={"fun": constraint, "type": "ineq"})
 
 accumulated = np.array(accumulator)
 pl.plot(accumulated[:, 0], accumulated[:, 1])
 
 pl.show()
-

@@ -1,20 +1,23 @@
 ..
     >>> import numpy as np
     >>> np.random.seed(0)
+    >>> import matplotlib.pyplot as plt
+    >>> plt.switch_backend("Agg")
+
 
 .. currentmodule:: numpy
 
-The Numpy array object
+The NumPy array object
 ======================
 
 .. contents:: Section contents
     :local:
     :depth: 1
 
-What are Numpy and Numpy arrays?
+What are NumPy and NumPy arrays?
 --------------------------------
 
-Numpy arrays
+NumPy arrays
 ............
 
 :**Python** objects:
@@ -24,7 +27,7 @@ Numpy arrays
     - containers: lists (costless insertion and append), dictionaries
       (fast lookup)
 
-:**Numpy** provides:
+:**NumPy** provides:
 
     - extension package to Python for multi-dimensional arrays
 
@@ -33,6 +36,8 @@ Numpy arrays
     - designed for scientific computation (convenience)
 
     - Also known as *array oriented computing*
+
+|
 
 .. sourcecode:: pycon
 
@@ -83,7 +88,7 @@ operations.
 .. each element of same size and type
 .. efficiency vs. Python lists
 
-Numpy Reference documentation
+NumPy Reference documentation
 ..............................
 
 - On the web: http://docs.scipy.org/
@@ -105,7 +110,7 @@ Numpy Reference documentation
      Help on built-in function array in module numpy.core.multiarray:
      <BLANKLINE>
      array(...)
-         array(object, dtype=None, copy=True, order=None, subok=False, ...
+         array(object, dtype=None, ...
 
 
 - Looking for something:
@@ -343,15 +348,15 @@ There are also other types:
   .. sourcecode:: pycon
 
         >>> f = np.array(['Bonjour', 'Hello', 'Hallo',])
-        >>> f.dtype     # <--- strings containing max. 7 letters
+        >>> f.dtype     # <--- strings containing max. 7 letters  # doctest: +SKIP
         dtype('S7')
 
 :Much more:
 
     * ``int32``
     * ``int64``
-    * ``unit32``
-    * ``unit64``
+    * ``uint32``
+    * ``uint64``
 
 .. XXX: mention: astype
 
@@ -361,29 +366,29 @@ Basic visualization
 
 Now that we have our first data arrays, we are going to visualize them.
 
-Start by launching IPython in *pylab* mode.
+Start by launching IPython:
 
 .. sourcecode:: bash
 
-    $ ipython --pylab
+    $ ipython
 
 Or the notebook:
 
 .. sourcecode:: bash
 
-   $ ipython notebook --pylab=inline
+   $ ipython notebook
 
-Alternatively, if IPython has already been started:
-
-.. sourcecode:: pycon
-
-    >>> %pylab  # doctest: +SKIP
-
-Or, from the notebook:
+Once IPython has started, enable interactive plots:
 
 .. sourcecode:: pycon
 
-    >>> %pylab inline
+    >>> %matplotlib  # doctest: +SKIP
+
+Or, from the notebook, enable plots in the notebook:
+
+.. sourcecode:: pycon
+
+    >>> %matplotlib inline # doctest: +SKIP
 
 The ``inline`` is important for the notebook, so that plots are displayed in
 the notebook and not in a new window.
@@ -394,45 +399,49 @@ the notebook and not in a new window.
 
     >>> import matplotlib.pyplot as plt  # the tidy way
 
-And then use (note that you have to use ``show`` explicitly):
+And then use (note that you have to use ``show`` explicitly if you have not enabled interactive plots with ``%matplotlib``):
 
 .. sourcecode:: pycon
 
     >>> plt.plot(x, y)       # line plot    # doctest: +SKIP
-    >>> plt.show()           # <-- shows the plot (not needed with pylab) # doctest: +SKIP
+    >>> plt.show()           # <-- shows the plot (not needed with interactive plots) # doctest: +SKIP
 
-Or, if you are using *pylab*:
+Or, if you have enabled interactive plots with ``%matplotlib``:
 
 .. sourcecode:: pycon
 
-    >>> plot(x, y)       # line plot    # doctest: +SKIP
-
-Using ``import matplotlib.pyplot as plt`` is recommended for use in scripts.
-Whereas ``pylab`` is recommended for interactive exploratory work.
+    >>> plt.plot(x, y)       # line plot    # doctest: +SKIP
 
 * **1D plotting**:
 
-  .. sourcecode:: pycon
+.. sourcecode:: pycon
 
-    >>> x = np.linspace(0, 3, 20)
-    >>> y = np.linspace(0, 9, 20)
-    >>> plt.plot(x, y)       # line plot    # doctest: +SKIP
-    [<matplotlib.lines.Line2D object at ...>]
-    >>> plt.plot(x, y, 'o')  # dot plot    # doctest: +SKIP
-    [<matplotlib.lines.Line2D object at ...>]
+  >>> x = np.linspace(0, 3, 20)
+  >>> y = np.linspace(0, 9, 20)
+  >>> plt.plot(x, y)       # line plot    # doctest: +SKIP
+  [<matplotlib.lines.Line2D object at ...>]
+  >>> plt.plot(x, y, 'o')  # dot plot    # doctest: +SKIP
+  [<matplotlib.lines.Line2D object at ...>]
 
-  .. plot:: pyplots/numpy_intro_1.py
+.. image:: auto_examples/images/sphx_glr_plot_basic1dplot_001.png
+    :width: 40%
+    :target: auto_examples/plot_basic1dplot.html
+    :align: center
 
 * **2D arrays** (such as images):
 
-  .. sourcecode:: pycon
+.. sourcecode:: pycon
 
-    >>> image = np.random.rand(30, 30)
-    >>> plt.imshow(image, cmap=plt.cm.hot)    # doctest: +SKIP
-    >>> plt.colorbar()    # doctest: +SKIP
-    <matplotlib.colorbar.Colorbar instance at ...>
+  >>> image = np.random.rand(30, 30)
+  >>> plt.imshow(image, cmap=plt.cm.hot)    # doctest: +ELLIPSIS
+  <matplotlib.image.AxesImage object at ...>
+  >>> plt.colorbar()    # doctest: +ELLIPSIS
+  <matplotlib.colorbar.Colorbar object at ...>
 
-  .. plot:: pyplots/numpy_intro_2.py
+.. image:: auto_examples/images/sphx_glr_plot_basic2dplot_001.png
+    :width: 50%
+    :target: auto_examples/plot_basic2dplot.html
+    :align: center
 
 .. seealso:: More in the: :ref:`matplotlib chapter <matplotlib>`
 
@@ -468,7 +477,7 @@ Whereas ``pylab`` is recommended for interactive exploratory work.
 ..    etc.
 ..
 ..    For more information on Mayavi :
-..    http://github.enthought.com/mayavi/mayavi
+..    https://github.enthought.com/mayavi/mayavi
 ..
 ..   .. seealso:: More in the :ref:`Mayavi chapter <mayavi-label>`
 
@@ -555,7 +564,7 @@ All three slice components are not required: by default, `start` is 0,
     >>> a[3:]
     array([3, 4, 5, 6, 7, 8, 9])
 
-A small illustrated summary of Numpy indexing and slicing...
+A small illustrated summary of NumPy indexing and slicing...
 
 .. only:: latex
 
@@ -712,8 +721,8 @@ memory and time.
 
    .. sourcecode:: pycon
 
-       >>> N_max = int(np.sqrt(len(is_prime)))
-       >>> for j in range(2, N_max):
+       >>> N_max = int(np.sqrt(len(is_prime) - 1))
+       >>> for j in range(2, N_max + 1):
        ...     is_prime[2*j::j] = False
 
    * Skim through ``help(np.nonzero)``, and print the prime numbers
@@ -725,7 +734,7 @@ memory and time.
      - Run it to check it works
 
      - Use the optimization suggested in `the sieve of Eratosthenes
-       <http://en.wikipedia.org/wiki/Sieve_of_Eratosthenes>`_:
+       <https://en.wikipedia.org/wiki/Sieve_of_Eratosthenes>`_:
 
       1. Skip ``j`` which are already known to not be primes
 
@@ -736,7 +745,7 @@ Fancy indexing
 
 .. tip::
 
-    Numpy arrays can be indexed with slices, but also with boolean or
+    NumPy arrays can be indexed with slices, but also with boolean or
     integer arrays (**masks**). This method is called *fancy indexing*.
     It creates **copies not views**.
 
@@ -746,7 +755,7 @@ Using boolean masks
 .. sourcecode:: pycon
 
     >>> np.random.seed(3)
-    >>> a = np.random.random_integers(0, 20, 15)
+    >>> a = np.random.randint(0, 21, 15)
     >>> a
     array([10,  3,  8,  0, 19, 10, 11,  9, 10,  6,  0, 20, 12,  7, 14])
     >>> (a % 3 == 0)
@@ -794,7 +803,7 @@ New values can be assigned with this kind of indexing:
 .. tip::
 
   When a new array is created by indexing with an array of integers, the
-  new array has the same shape than the array of integers:
+  new array has the same shape as the array of integers:
 
   .. sourcecode:: pycon
 

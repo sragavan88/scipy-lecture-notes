@@ -1,10 +1,12 @@
+.. _debugging_chapter:
+
 ==============
 Debugging code
 ==============
 
-:author: Gaël Varoquaux
+**Author**: *Gaël Varoquaux*
 
-This tutorial explores tool to understand better your code base:
+This section explores tools to understand better your code base:
 debugging, to find and fix bugs.
 
 It is not specific to the scientific Python community, but the strategies
@@ -14,13 +16,13 @@ that we will employ are tailored to its needs.
 
     * Numpy
     * IPython
-    * nosetests (http://readthedocs.org/docs/nose/en/latest/)
-    * pyflakes (http://pypi.python.org/pypi/pyflakes)
+    * `nosetests <http://readthedocs.org/docs/nose/en/latest/>`__
+    * `pyflakes <http://pypi.python.org/pypi/pyflakes>`__
     * gdb for the C-debugging part.
 
-.. contents:: Chapters contents
+.. contents:: Chapter contents
    :local:
-   :depth: 4
+   :depth: 2
 
 
 Avoiding bugs
@@ -59,7 +61,6 @@ They are several static analysis tools in Python; to name a few:
 * `pylint <http://www.logilab.org/857>`_
 * `pychecker <http://pychecker.sourceforge.net/>`_
 * `pyflakes <http://pypi.python.org/pypi/pyflakes>`_
-* `pep8 <http://pypi.python.org/pypi/pep8>`_
 * `flake8 <http://pypi.python.org/pypi/flake8>`_
 
 Here we focus on `pyflakes`, which is the simplest tool.
@@ -71,7 +72,7 @@ Here we focus on `pyflakes`, which is the simplest tool.
 Another good recommendation is the `flake8` tool which is a combination of
 pyflakes and pep8. Thus, in addition to the types of errors that pyflakes
 catches, flake8 detects violations of the recommendation in `PEP8
-<http://www.python.org/dev/peps/pep-0008/>`_ style guide.
+<https://www.python.org/dev/peps/pep-0008/>`_ style guide.
 
 Integrating pyflakes (or flake8) in your editor or IDE is highly
 recommended, it **does yield productivity gains**.
@@ -95,7 +96,7 @@ You can bind a key to run pyflakes in the current buffer.
   Menu: TextMate -> Preferences -> Advanced -> Shell variables, add a
   shell variable::
 
-    TM_PYCHECKER=/Library/Frameworks/Python.framework/Versions/Current/bin/pyflakes
+    TM_PYCHECKER = /Library/Frameworks/Python.framework/Versions/Current/bin/pyflakes
 
   Then `Ctrl-Shift-V` is binded to a pyflakes report
 
@@ -206,7 +207,7 @@ in. There is no silver bullet. Yet, strategies help:
 Using the Python debugger
 =========================
 
-The python debugger, ``pdb``: http://docs.python.org/library/pdb.html,
+The python debugger, ``pdb``: https://docs.python.org/library/pdb.html,
 allows you to inspect your code interactively.
 
 Specifically it allows you to:
@@ -245,13 +246,13 @@ Here we debug the file :download:`index_error.py`. When running it, an
     In [1]: %run index_error.py
     ---------------------------------------------------------------------------
     IndexError                                Traceback (most recent call last)
-    /home/varoquau/dev/scipy-lecture-notes/advanced/debugging_optimizing/index_error.py in <module>()
+    /home/varoquau/dev/scipy-lecture-notes/advanced/debugging/index_error.py in <module>()
           6
           7 if __name__ == '__main__':
     ----> 8     index_error()
           9
 
-    /home/varoquau/dev/scipy-lecture-notes/advanced/debugging_optimizing/index_error.py in index_error()
+    /home/varoquau/dev/scipy-lecture-notes/advanced/debugging/index_error.py in index_error()
           3 def index_error():
           4     lst = list('foobar')
     ----> 5     print lst[len(lst)]
@@ -261,7 +262,7 @@ Here we debug the file :download:`index_error.py`. When running it, an
     IndexError: list index out of range
 
     In [2]: %debug
-    > /home/varoquau/dev/scipy-lecture-notes/advanced/debugging_optimizing/index_error.py(5)index_error()
+    > /home/varoquau/dev/scipy-lecture-notes/advanced/debugging/index_error.py(5)index_error()
           4     lst = list('foobar')
     ----> 5     print lst[len(lst)]
           6
@@ -292,7 +293,7 @@ Here we debug the file :download:`index_error.py`. When running it, an
    you can call the script with ``python -m pdb script.py``::
 
     $ python -m pdb index_error.py
-    > /home/varoquau/dev/scipy-lecture-notes/advanced/debugging_optimizing/index_error.py(1)<module>()
+    > /home/varoquau/dev/scipy-lecture-notes/advanced/optimizing/index_error.py(1)<module>()
     -> """Small snippet to raise an IndexError."""
     (Pdb) continue
     Traceback (most recent call last):
@@ -310,7 +311,7 @@ Here we debug the file :download:`index_error.py`. When running it, an
     IndexError: list index out of range
     Uncaught exception. Entering post mortem debugging
     Running 'cont' or 'step' will restart the program
-    > /home/varoquau/dev/scipy-lecture-notes/advanced/debugging_optimizing/index_error.py(5)index_error()
+    > /home/varoquau/dev/scipy-lecture-notes/advanced/optimizing/index_error.py(5)index_error()
     -> print lst[len(lst)]
     (Pdb)
 
@@ -331,7 +332,7 @@ Indeed the code runs, but the filtering does not work well.
     *** Blank or comment
     *** Blank or comment
     *** Blank or comment
-    Breakpoint 1 at /home/varoquau/dev/scipy-lecture-notes/advanced/debugging_optimizing/wiener_filtering.py:4
+    Breakpoint 1 at /home/varoquau/dev/scipy-lecture-notes/advanced/optimizing/wiener_filtering.py:4
     NOTE: Enter 'c' at the ipdb>  prompt to start your script.
     > <string>(1)<module>()
 
@@ -340,20 +341,20 @@ Indeed the code runs, but the filtering does not work well.
   .. sourcecode:: ipython
 
     ipdb> n
-    > /home/varoquau/dev/scipy-lecture-notes/advanced/debugging_optimizing/wiener_filtering.py(4)<module>()
+    > /home/varoquau/dev/scipy-lecture-notes/advanced/optimizing/wiener_filtering.py(4)<module>()
           3
     1---> 4 import numpy as np
           5 import scipy as sp
 
     ipdb> b 34
-    Breakpoint 2 at /home/varoquau/dev/scipy-lecture-notes/advanced/debugging_optimizing/wiener_filtering.py:34
+    Breakpoint 2 at /home/varoquau/dev/scipy-lecture-notes/advanced/optimizing/wiener_filtering.py:34
 
 * Continue execution to next breakpoint with ``c(ont(inue))``:
 
   .. sourcecode:: ipython
 
     ipdb> c
-    > /home/varoquau/dev/scipy-lecture-notes/advanced/debugging_optimizing/wiener_filtering.py(34)iterated_wiener()
+    > /home/varoquau/dev/scipy-lecture-notes/advanced/optimizing/wiener_filtering.py(34)iterated_wiener()
          33     """
     2--> 34     noisy_img = noisy_img
          35     denoised_img = local_mean(noisy_img, size=size)
@@ -365,13 +366,13 @@ Indeed the code runs, but the filtering does not work well.
   .. sourcecode:: ipython
 
     ipdb> s
-    > /home/varoquau/dev/scipy-lecture-notes/advanced/debugging_optimizing/wiener_filtering.py(35)iterated_wiener()
+    > /home/varoquau/dev/scipy-lecture-notes/advanced/optimizing/wiener_filtering.py(35)iterated_wiener()
     2    34     noisy_img = noisy_img
     ---> 35     denoised_img = local_mean(noisy_img, size=size)
          36     l_var = local_var(noisy_img, size=size)
 
     ipdb> n
-    > /home/varoquau/dev/scipy-lecture-notes/advanced/debugging_optimizing/wiener_filtering.py(36)iterated_wiener()
+    > /home/varoquau/dev/scipy-lecture-notes/advanced/optimizing/wiener_filtering.py(36)iterated_wiener()
          35     denoised_img = local_mean(noisy_img, size=size)
     ---> 36     l_var = local_var(noisy_img, size=size)
          37     for i in range(3):
@@ -382,7 +383,7 @@ Indeed the code runs, but the filtering does not work well.
   .. sourcecode:: ipython
 
     ipdb> n
-    > /home/varoquau/dev/scipy-lecture-notes/advanced/debugging_optimizing/wiener_filtering.py(37)iterated_wiener()
+    > /home/varoquau/dev/scipy-lecture-notes/advanced/optimizing/wiener_filtering.py(37)iterated_wiener()
          36     l_var = local_var(noisy_img, size=size)
     ---> 37     for i in range(3):
          38         res = noisy_img - denoised_img
@@ -428,10 +429,10 @@ doing integer arithmetic.
         --> 178             __builtin__.execfile(filename, *where)
 
         /home/esc/physique-cuso-python-2013/scipy-lecture-notes/advanced/debugging/wiener_filtering.py in <module>()
-             55 pl.matshow(noisy_lena[cut], cmap=pl.cm.gray)
+             55 pl.matshow(noisy_face[cut], cmap=pl.cm.gray)
              56 
-        ---> 57 denoised_lena = iterated_wiener(noisy_lena)
-             58 pl.matshow(denoised_lena[cut], cmap=pl.cm.gray)
+        ---> 57 denoised_face = iterated_wiener(noisy_face)
+             58 pl.matshow(denoised_face[cut], cmap=pl.cm.gray)
              59 
 
         /home/esc/physique-cuso-python-2013/scipy-lecture-notes/advanced/debugging/wiener_filtering.py in iterated_wiener(noisy_img, size)
@@ -509,7 +510,7 @@ Debugger commands and interaction
 
     You cannot name the variables the way you want. For instance, if in
     you cannot override the variables in the current frame with the same
-    name: **use different names then your local variable when typing code
+    name: **use different names than your local variable when typing code
     in the debugger**.
 
 Getting help when in the debugger
@@ -548,7 +549,7 @@ useless. For this we turn to the gnu debugger,
 `gdb <http://www.gnu.org/s/gdb/>`_, available on Linux.
 
 Before we start with gdb, let us add a few Python-specific tools to it.
-For this we add a few macros to our ``~/.gbdinit``. The optimal choice of
+For this we add a few macros to our ``~/.gdbinit``. The optimal choice of
 macro depends on your Python version and your gdb version. I have added a
 simplified version in :download:`gdbinit`, but feel free to read
 `DebuggingWithGdb <http://wiki.python.org/moin/DebuggingWithGdb>`_.

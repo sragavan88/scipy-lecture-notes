@@ -2,24 +2,23 @@
 Interfacing with C
 ==================
 
-:author: Valentin Haenel
+**Author**: *Valentin Haenel*
 
-.. TODO::
-
+.. TODO:
+   
    * Download links
    * Timing?
    * Additional documentation
    * What about overflow?
 
-.. topic:: Foreword
-
-This chapter contains an *introduction* to the many different routes for making
-your native code (primarily ``C/C++``) available from Python, a process
-commonly referred to *wrapping*. The goal of this chapter is to give you a
-flavour of what technologies exist and what their respective merits and
-shortcomings are, so that you can select the appropriate one for your specific
-needs. In any case, once you do start wrapping, you almost certainly will want
-to consult the respective documentation for your selected technique.
+This chapter contains an *introduction* to the many different routes for
+making your native code (primarily ``C/C++``) available from Python, a
+process commonly referred to *wrapping*. The goal of this chapter is to
+give you a flavour of what technologies exist and what their respective
+merits and shortcomings are, so that you can select the appropriate one
+for your specific needs. In any case, once you do start wrapping, you
+almost certainly will want to consult the respective documentation for
+your selected technique.
 
 .. contents:: Chapters contents
    :local:
@@ -30,8 +29,8 @@ Introduction
 
 This chapter covers the following techniques:
 
-* `Python-C-Api <http://docs.python.org/2/c-api/>`_
-* `Ctypes <http://docs.python.org/2/library/ctypes.html>`_
+* `Python-C-Api <https://docs.python.org/2/c-api/>`_
+* `Ctypes <https://docs.python.org/2/library/ctypes.html>`_
 * `SWIG (Simplified Wrapper and Interface Generator) <http://www.swig.org/>`_
 * `Cython <http://cython.org/>`_
 
@@ -75,7 +74,7 @@ Last but not least, two small warnings:
 Python-C-Api
 ============
 
-The `Python-C-API <http://docs.python.org/2/c-api/>`_ is the backbone of the
+The `Python-C-API <https://docs.python.org/2/c-api/>`_ is the backbone of the
 standard Python interpreter (a.k.a *CPython*). Using this API it is possible to
 write Python extension module in C and C++. Obviously, these extension modules
 can, by virtue of language compatibility, call any function written in C or
@@ -112,7 +111,7 @@ return type.
    Since refernce counting bugs are easy to create and hard to track down,
    anyone really needing to use the Python C-API should read the `section
    about objects, types and reference counts
-   <http://docs.python.org/2/c-api/intro.html#objects-types-and-reference-counts>`_
+   <https://docs.python.org/2/c-api/intro.html#objects-types-and-reference-counts>`_
    from the official python documentation. Additionally, there is a tool by the
    name of `cpychecker
    <https://gcc-python-plugin.readthedocs.org/en/latest/cpychecker.html>`_
@@ -163,6 +162,12 @@ This can be compiled:
 
 The file ``cos_module.so`` contains the compiled extension, which we can now load in the IPython interpreter:
 
+.. note::
+
+   In Python 3, the filename for compiled modules includes metadata on the Python
+   interpreter (see `PEP 3149 <https://www.python.org/dev/peps/pep-3149/>`_) and is thus
+   longer. The import statement is not affected by this.
+
 .. sourcecode:: ipython
 
     In [1]: import cos_module
@@ -204,7 +209,7 @@ Analog to the Python-C-API, Numpy, which is itself implemented as a
 C-extension, comes with the `Numpy-C-API
 <http://docs.scipy.org/doc/numpy/reference/c-api.html>`_. This API can be used
 to create and manipulate Numpy arrays from C, when writing a custom
-C-extension. See also: :ref:`advanced_numpy`_.
+C-extension. See also: :ref:`advanced_numpy`.
 
 .. note::
 
@@ -242,7 +247,7 @@ And this should result in the following figure:
 Ctypes
 ======
 
-`Ctypes <http://docs.python.org/2/library/ctypes.html>`_ is a *foreign
+`Ctypes <https://docs.python.org/2/library/ctypes.html>`_ is a *foreign
 function library* for Python. It provides C compatible data types, and allows
 calling functions in DLLs or shared libraries. It can be used to wrap these
 libraries in pure Python.
@@ -269,7 +274,7 @@ As advertised, the wrapper code is in pure Python.
 
 * Finding and loading the library may vary depending on your operating system,
   check `the documentation
-  <http://docs.python.org/2/library/ctypes.html#loading-dynamic-link-libraries>`_
+  <https://docs.python.org/2/library/ctypes.html#loading-dynamic-link-libraries>`_
   for details
 * This may be somewhat deceptive, since the math library exists in compiled
   form on the system already. If you were to wrap a in-house library, you would

@@ -325,7 +325,7 @@ convention:
 
 
     For the sake of standardization, the `Docstring
-    Conventions <http://www.python.org/dev/peps/pep-0257>`_ webpage
+    Conventions <https://www.python.org/dev/peps/pep-0257>`_ webpage
     documents the semantics and conventions associated with Python
     docstrings.
 
@@ -368,15 +368,23 @@ Exercises
     Write a function that displays the ``n`` first terms of the Fibonacci
     sequence, defined by:
 
-    * ``u_0 = 1; u_1 = 1``
-    * ``u_(n+2) = u_(n+1) + u_n``
+    .. math::
+        \left\{
+            \begin{array}{ll}
+                U_{0} = 0 \\
+                U_{1} = 1 \\
+                U_{n+2} = U_{n+1} + U_{n}
+            \end{array}
+        \right.
 
 .. :ref:`fibonacci`
 
 .. topic:: Exercise: Quicksort
     :class: green
 
-    Implement the quicksort algorithm, as defined by wikipedia::
+    Implement the quicksort algorithm, as defined by wikipedia
+
+.. parsed-literal::
 
     function quicksort(array)
         var list less, greater

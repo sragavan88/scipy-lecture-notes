@@ -79,7 +79,6 @@ of probabilities::
 
     >>> nprob = np.linspace(0, 1, 1e2)
     >>> fitted_max_speeds = quantile_func(nprob)
-    2%
 
 In the current model, the maximum wind speed occurring every 50 years is
 defined as the upper 2% quantile. As a result, the cumulative probability
@@ -92,11 +91,11 @@ So the storm wind speed occurring every 50 years can be guessed by::
 
     >>> fifty_wind = quantile_func(fifty_prob)
     >>> fifty_wind      # doctest: +ELLIPSIS
-    32.97989825...
+    array(32.97989825...)
 
 The results are now gathered on a Matplotlib figure:
 
-.. figure:: auto_examples/images/plot_cumulative_wind_speed_prediction_1.png
+.. figure:: auto_examples/images/sphx_glr_plot_cumulative_wind_speed_prediction_001.png
     :align: center
 
     Solution: :ref:`Python source file <example_plot_cumulative_wind_speed_prediction.py>`
@@ -115,7 +114,7 @@ until you have completed the exercise.
 * The first step will be to find the annual maxima by using numpy
   and plot them as a matplotlib bar figure.
 
-.. figure:: auto_examples/images/plot_sprog_annual_maxima_1.png
+.. figure:: auto_examples/images/sphx_glr_plot_sprog_annual_maxima_001.png
     :align: center
 
     Solution: :ref:`Python source file <example_plot_sprog_annual_maxima.py>`
@@ -127,7 +126,7 @@ until you have completed the exercise.
   of the ``UnivariateSpline``). Plotting the annual maxima versus the
   Gumbell distribution should give you the following figure.
 
-.. figure:: auto_examples/images/plot_gumbell_wind_speed_prediction_1.png
+.. figure:: auto_examples/images/sphx_glr_plot_gumbell_wind_speed_prediction_001.png
     :align: center
 
     Solution: :ref:`Python source file <example_plot_gumbell_wind_speed_prediction.py>`
